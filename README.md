@@ -44,10 +44,17 @@ These scripts provide a proactive approach to thermal management, allowing you t
 
 ### Homebrew (Recommended)
 
-The easiest way to install on macOS is via Homebrew. Simply run the following command:
+The easiest way to install on macOS is via Homebrew. Run the following commands:
 
 ```bash
-brew install --formula https://raw.githubusercontent.com/nelsojona/macbook-cooler/main/Formula/macbook-cooler.rb
+# Download the formula
+curl -sL https://raw.githubusercontent.com/nelsojona/macbook-cooler/main/Formula/macbook-cooler.rb -o macbook-cooler.rb
+
+# Install from the local file
+brew install --formula ./macbook-cooler.rb
+
+# Clean up the downloaded file
+rm macbook-cooler.rb
 ```
 
 To start the automatic power mode service:
@@ -60,7 +67,6 @@ To uninstall:
 
 ```bash
 brew uninstall macbook-cooler
-brew untap nelsojona/macbook-cooler
 ```
 
 ### Quick Start (One-Liner)
