@@ -170,7 +170,7 @@ struct SettingsPanelView: View {
                                     .font(.system(size: 11))
                                     .foregroundColor(.secondary)
                                 Spacer()
-                                Text("1.0.0")
+                                Text("1.1.0")
                                     .font(.system(size: 11, weight: .medium))
                             }
                             
@@ -179,7 +179,7 @@ struct SettingsPanelView: View {
                                     .font(.system(size: 11))
                                     .foregroundColor(.secondary)
                                 Spacer()
-                                Text(appState.cliVersion.isEmpty ? "1.0.0" : appState.cliVersion)
+                                Text(appState.cliVersion.isEmpty ? "1.1.0" : appState.cliVersion)
                                     .font(.system(size: 11, weight: .medium))
                             }
                             
@@ -696,7 +696,7 @@ struct MainDashboardView: View {
                 }
                 .buttonStyle(.plain)
             } else {
-                Text("v\(appState.cliVersion.isEmpty ? "1.0.0" : appState.cliVersion)")
+                Text("v\(appState.cliVersion.isEmpty ? "1.1.0" : appState.cliVersion)")
                     .font(.system(size: 9))
                     .foregroundColor(.secondary)
             }
