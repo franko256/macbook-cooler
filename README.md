@@ -46,9 +46,10 @@ MacBook Cooler provides a proactive approach to thermal management, allowing you
 | Feature | Menu Bar App | CLI Tools |
 |---------|:------------:|:---------:|
 | Real-time temperature monitoring | ✓ | ✓ |
-| Automatic power mode switching | ✓ | ✓ |
+| Power mode switching | ✓ | ✓ |
 | Temperature unit toggle (°F/°C) | ✓ | - |
 | Light/Dark/System appearance | ✓ | - |
+| Automatic power mode service | - | ✓ |
 | Process throttling | - | ✓ |
 | Task scheduling | - | ✓ |
 | Fan control profiles | - | ✓ |
@@ -62,7 +63,7 @@ MacBook Cooler provides a proactive approach to thermal management, allowing you
 
 ### Menu Bar App Installation
 
-The menu bar app provides a beautiful, user-friendly interface for thermal management. Choose one of the following installation methods:
+The menu bar app provides a beautiful, user-friendly interface for thermal monitoring and power mode control. Choose one of the following installation methods:
 
 #### Option 1: Homebrew Cask (Recommended)
 
@@ -82,7 +83,7 @@ brew install --cask macbook-cooler-app
 
 ### CLI Tools Installation
 
-The CLI tools provide advanced thermal management capabilities for power users.
+The CLI tools provide advanced thermal management capabilities including background services for automatic power mode switching.
 
 #### Option 1: Homebrew (Recommended)
 
@@ -93,7 +94,7 @@ brew tap nelsojona/macbook-cooler
 # Install the CLI tools
 brew install macbook-cooler
 
-# Start the automatic power mode service
+# Start the automatic power mode service (runs in background)
 brew services start macbook-cooler
 ```
 
@@ -115,30 +116,59 @@ cd macbook-cooler/scripts
 
 ## Menu Bar App
 
-The MacBook Cooler menu bar app provides an elegant interface for monitoring and managing your MacBook's thermal performance.
+The MacBook Cooler menu bar app provides an elegant interface for monitoring your MacBook's thermal performance.
 
 ### Dashboard
 
-The main dashboard displays real-time thermal information including CPU and GPU temperatures, current power mode, and system status. Temperature readings update automatically and are color-coded based on thermal thresholds.
+The main dashboard displays real-time thermal information:
+
+- **CPU Temperature**: Current CPU temperature with color-coded indicator
+- **GPU Temperature**: Current GPU temperature
+- **CPU Usage**: Current processor utilization
+- **Fan Speed**: Current fan RPM (if available)
+- **Power Mode**: Current macOS power mode
+- **Thermal Pressure**: System thermal state (Nominal, Moderate, Heavy)
+
+Temperature readings update automatically every 3 seconds and are color-coded based on thermal thresholds.
 
 ### Power Modes
 
-Three power modes are available for quick switching:
+Four power modes are available for quick switching directly from the app:
 
 | Mode | Description |
 |------|-------------|
-| **Low Power** | Reduces performance to minimize heat generation. Ideal for battery life and quiet operation. |
-| **Automatic** | Lets macOS manage power based on workload. Recommended for most users. |
-| **High Performance** | Maximizes performance at the cost of higher temperatures and fan noise. |
+| **Auto** | Lets macOS manage power based on workload. Recommended for most users. |
+| **Low** | Reduces performance to minimize heat generation. Ideal for battery life and quiet operation. |
+| **Normal** | Balanced performance and thermal management. |
+| **High** | Maximizes performance at the cost of higher temperatures and fan noise. |
 
 ### Settings
 
-Access settings by clicking the gear icon in the popover or right-clicking the menu bar icon. Available options include:
+Access settings by clicking the gear icon. Available options include:
 
 - **Temperature Unit**: Toggle between Fahrenheit (default) and Celsius.
 - **Appearance**: Choose Light, Dark, or System appearance mode.
 - **Launch at Login**: Start the app automatically when you log in.
-- **Temperature Thresholds**: Customize the temperatures that trigger automatic power mode changes.
+- **Temperature Thresholds**: Customize the warning and recovery temperatures.
+- **Show in Menu Bar**: Toggle temperature display in the menu bar.
+
+### Background Service (CLI)
+
+For automatic power mode switching based on temperature, use the CLI tools:
+
+```bash
+# Install CLI tools
+brew tap nelsojona/macbook-cooler
+brew install macbook-cooler
+
+# Start background service
+brew services start macbook-cooler
+
+# Stop background service
+brew services stop macbook-cooler
+```
+
+The background service monitors temperature and automatically switches power modes when thresholds are reached.
 
 ---
 
@@ -256,7 +286,7 @@ DEFAULT_FAN_PROFILE=balanced
 | **Permission denied** | Most CLI scripts require `sudo` to access system metrics. Run them with `sudo`. |
 | **Fan control not working** | Direct fan control on Apple Silicon is limited by firmware. Install Macs Fan Control for better results. |
 | **App won't open** | Right-click the app and select "Open" to bypass Gatekeeper on first launch. |
-| **Temperature not updating** | Grant the app permission to access system information in System Settings > Privacy & Security. |
+| **Temperature shows 32°F/0°C** | SMC access may be restricted. Try running the app from Applications folder. |
 
 ---
 
