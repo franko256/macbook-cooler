@@ -15,6 +15,15 @@ enum PowerMode: String, CaseIterable {
     case lowPower = "Low Power"
     case normal = "Normal"
     case highPerformance = "High Performance"
+    
+    var shortName: String {
+        switch self {
+        case .automatic: return "Auto"
+        case .lowPower: return "Low"
+        case .normal: return "Normal"
+        case .highPerformance: return "High"
+        }
+    }
 }
 
 enum TemperatureUnit: String, CaseIterable {
@@ -121,6 +130,18 @@ class AppState: ObservableObject {
             case .dark:
                 NSApp.appearance = NSAppearance(named: .darkAqua)
             }
+        }
+    }
+    
+    // Computed property for SwiftUI preferredColorScheme
+    var colorScheme: ColorScheme? {
+        switch appearanceMode {
+        case .system:
+            return nil
+        case .light:
+            return .light
+        case .dark:
+            return .dark
         }
     }
     
