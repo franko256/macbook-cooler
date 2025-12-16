@@ -539,7 +539,6 @@ struct MainDashboardView: View {
                     temperatureCard
                     statsGrid
                     powerModeSection
-                    serviceControlSection
                 }
                 .frame(width: contentWidth)
                 .padding(.vertical, 12)
