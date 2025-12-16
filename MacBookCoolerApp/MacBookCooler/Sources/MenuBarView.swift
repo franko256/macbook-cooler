@@ -234,6 +234,7 @@ struct MainDashboardView: View {
                     statsGrid
                     powerModeSection
                     serviceControlSection
+                    settingsSection
                 }
                 .frame(width: contentWidth)
                 .padding(.vertical, 12)
@@ -393,6 +394,49 @@ struct MainDashboardView: View {
             .toggleStyle(.switch)
             .labelsHidden()
             .scaleEffect(0.75)
+        }
+        .padding(10)
+        .background(RoundedRectangle(cornerRadius: 8).fill(.ultraThinMaterial))
+    }
+    
+    private var settingsSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Settings")
+                .font(.system(size: 10, weight: .semibold))
+                .foregroundColor(.secondary)
+            
+            // Temperature Unit
+            HStack {
+                Text("Temperature")
+                    .font(.system(size: 11, weight: .medium))
+                Spacer()
+                Picker("", selection: Binding(
+                    get: { appState.temperatureUnit },
+                    set: { appState.setTemperatureUnit($0) }
+                )) {
+                    Text("°F").tag(TemperatureUnit.fahrenheit)
+                    Text("°C").tag(TemperatureUnit.celsius)
+                }
+                .pickerStyle(.segmented)
+                .frame(width: 80)
+            }
+            
+            // Appearance Mode
+            HStack {
+                Text("Appearance")
+                    .font(.system(size: 11, weight: .medium))
+                Spacer()
+                Picker("", selection: Binding(
+                    get: { appState.appearanceMode },
+                    set: { appState.setAppearanceMode($0) }
+                )) {
+                    ForEach(AppearanceMode.allCases, id: \.self) { mode in
+                        Text(mode.rawValue).tag(mode)
+                    }
+                }
+                .pickerStyle(.menu)
+                .frame(width: 90)
+            }
         }
         .padding(10)
         .background(RoundedRectangle(cornerRadius: 8).fill(.ultraThinMaterial))
