@@ -77,9 +77,27 @@ class AppState: ObservableObject {
     private var timer: Timer?
     private var updateCallback: (() -> Void)?
     
-    private let homebrewPath = "/opt/homebrew/bin/brew"
-    private let thermalMonitorPath = "/opt/homebrew/bin/thermal-monitor"
-    private let thermalPowerPath = "/opt/homebrew/bin/thermal-power"
+    // Homebrew paths - check both Apple Silicon and Intel locations
+    private var homebrewPath: String {
+        if FileManager.default.fileExists(atPath: "/opt/homebrew/bin/brew") {
+            return "/opt/homebrew/bin/brew"
+        } else if FileManager.default.fileExists(atPath: "/usr/local/bin/brew") {
+            return "/usr/local/bin/brew"
+        }
+        return "/opt/homebrew/bin/brew" // Default fallback
+    }
+    
+    private var homebrewBinPath: String {
+        if FileManager.default.fileExists(atPath: "/opt/homebrew/bin/brew") {
+            return "/opt/homebrew/bin"
+        } else if FileManager.default.fileExists(atPath: "/usr/local/bin/brew") {
+            return "/usr/local/bin"
+        }
+        return "/opt/homebrew/bin" // Default fallback
+    }
+    
+    private var thermalMonitorPath: String { homebrewBinPath + "/thermal-monitor" }
+    private var thermalPowerPath: String { homebrewBinPath + "/thermal-power" }
     
     init() {
         // Register default values for UserDefaults
