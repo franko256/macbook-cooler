@@ -710,10 +710,18 @@ struct MainDashboardView: View {
             
             Spacer()
             
+            // Quit button - always visible and prominent
             Button(action: { NSApp.terminate(nil) }) {
-                Text("Quit")
-                    .font(.system(size: 9, weight: .medium))
-                    .foregroundColor(.secondary)
+                HStack(spacing: 4) {
+                    Image(systemName: "power")
+                        .font(.system(size: 9, weight: .semibold))
+                    Text("Quit")
+                        .font(.system(size: 10, weight: .medium))
+                }
+                .foregroundColor(.secondary)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
+                .background(RoundedRectangle(cornerRadius: 4).fill(.ultraThinMaterial))
             }
             .buttonStyle(.plain)
         }
