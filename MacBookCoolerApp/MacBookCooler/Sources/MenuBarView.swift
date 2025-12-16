@@ -75,7 +75,7 @@ struct SettingsPanelView: View {
                 .opacity(0)
             }
             .frame(width: contentWidth)
-            .padding(.top, 16)
+            .padding(.top, 28)
             .padding(.bottom, 12)
             
             Divider()
