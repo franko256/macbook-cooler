@@ -476,7 +476,7 @@ struct MainDashboardView: View {
             // Header
             headerView
                 .frame(width: contentWidth)
-                .padding(.top, 12)
+                .padding(.top, 20)
                 .padding(.bottom, 8)
             
             Divider()
