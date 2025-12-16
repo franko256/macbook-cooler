@@ -688,13 +688,21 @@ struct MainDashboardView: View {
     }
     
     private var serviceControlSection: some View {
-        HStack(spacing: 8) {
+        let cliInstalled = appState.homebrewStatus == .cliToolsInstalled || appState.homebrewStatus == .cliToolsOutdated
+        
+        return HStack(spacing: 8) {
             VStack(alignment: .leading, spacing: 1) {
                 Text("Background Service")
                     .font(.system(size: 11, weight: .medium))
-                Text(appState.isServiceRunning ? "Auto thermal management" : "Service stopped")
-                    .font(.system(size: 9))
-                    .foregroundColor(.secondary)
+                if cliInstalled {
+                    Text(appState.isServiceRunning ? "Auto thermal management" : "Service stopped")
+                        .font(.system(size: 9))
+                        .foregroundColor(.secondary)
+                } else {
+                    Text("Requires CLI tools")
+                        .font(.system(size: 9))
+                        .foregroundColor(.orange)
+                }
             }
             
             Spacer()
@@ -702,14 +710,21 @@ struct MainDashboardView: View {
             Toggle("", isOn: Binding(
                 get: { appState.isServiceRunning },
                 set: { _ in
-                    appState.toggleService { success in
-                        if !success { alertMessage = "Failed to toggle service"; showAlert = true }
+                    if cliInstalled {
+                        appState.toggleService { success in
+                            if !success { alertMessage = "Failed to toggle service"; showAlert = true }
+                        }
+                    } else {
+                        alertMessage = "Install CLI tools first via Homebrew:\nbrew tap nelsojona/macbook-cooler\nbrew install macbook-cooler"
+                        showAlert = true
                     }
                 }
             ))
             .toggleStyle(.switch)
             .labelsHidden()
             .scaleEffect(0.75)
+            .disabled(!cliInstalled)
+            .opacity(cliInstalled ? 1.0 : 0.5)
         }
         .padding(10)
         .background(RoundedRectangle(cornerRadius: 8).fill(.ultraThinMaterial))
