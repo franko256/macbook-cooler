@@ -7,16 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A1000001 /* MacBookCoolerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000002; };
-		A1000003 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000004; };
-		A1000005 /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000006; };
-		A1000007 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1000008; };
+			A1000001 /* MacBookCoolerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000002; };
+			A1000003 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000004; };
+			A1000005 /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000006; };
+			A1000007 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1000008; };
+			A1000012 /* SMCKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000013; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A1000002 /* MacBookCoolerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacBookCoolerApp.swift; sourceTree = "<group>"; };
-		A1000004 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
-		A1000006 /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
+			A1000002 /* MacBookCoolerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacBookCoolerApp.swift; sourceTree = "<group>"; };
+			A1000004 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+			A1000006 /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
+			A1000013 /* SMCKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMCKit.swift; sourceTree = "<group>"; };
 		A1000008 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1000009 /* MacBookCooler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacBookCooler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1000010 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -62,14 +64,15 @@
 			sourceTree = "<group>";
 		};
 		A1000033 /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				A1000002 /* MacBookCoolerApp.swift */,
-				A1000004 /* AppState.swift */,
-				A1000006 /* MenuBarView.swift */,
-			);
-			path = Sources;
-			sourceTree = "<group>";
+				isa = PBXGroup;
+				children = (
+					A1000002 /* MacBookCoolerApp.swift */,
+					A1000004 /* AppState.swift */,
+					A1000006 /* MenuBarView.swift */,
+					A1000013 /* SMCKit.swift */,
+				);
+				path = Sources;
+				sourceTree = "<group>";
 		};
 		A1000034 /* Resources */ = {
 			isa = PBXGroup;
@@ -145,15 +148,16 @@
 
 /* Begin PBXSourcesBuildPhase section */
 		A1000041 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A1000001 /* MacBookCoolerApp.swift in Sources */,
-				A1000003 /* AppState.swift in Sources */,
-				A1000005 /* MenuBarView.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
+				isa = PBXSourcesBuildPhase;
+				buildActionMask = 2147483647;
+				files = (
+					A1000001 /* MacBookCoolerApp.swift in Sources */,
+					A1000003 /* AppState.swift in Sources */,
+					A1000005 /* MenuBarView.swift in Sources */,
+					A1000012 /* SMCKit.swift in Sources */,
+				);
+				runOnlyForDeploymentPostprocessing = 0;
+			};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */

@@ -386,43 +386,59 @@ class AppState: ObservableObject {
     }
     
     private func getThermalData() -> (cpuTemp: Double, gpuTemp: Double, cpuUsage: Double, fanSpeed: Int, pressure: String) {
-        // Try to get data from thermal-monitor if installed
-        if FileManager.default.fileExists(atPath: thermalMonitorPath) {
-            let task = Process()
-            task.executableURL = URL(fileURLWithPath: "/usr/bin/sudo")
-            task.arguments = [thermalMonitorPath, "--json", "--single"]
-            
-            let pipe = Pipe()
-            task.standardOutput = pipe
-            task.standardError = FileHandle.nullDevice
-            
-            do {
-                try task.run()
-                task.waitUntilExit()
-                
-                let data = pipe.fileHandleForReading.readDataToEndOfFile()
-                if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
-                    return (
-                        cpuTemp: json["cpu_temp"] as? Double ?? 0,
-                        gpuTemp: json["gpu_temp"] as? Double ?? 0,
-                        cpuUsage: json["cpu_usage"] as? Double ?? 0,
-                        fanSpeed: json["fan_speed"] as? Int ?? 0,
-                        pressure: json["thermal_pressure"] as? String ?? "Unknown"
-                    )
-                }
-            } catch {
-                // Fall through to simulated data
+        // Read real temperatures from SMC (System Management Controller)
+        let smcData = SMCReader.shared.getAllThermalData()
+        
+        // Get CPU temperature from SMC
+        let cpuTemp = smcData.cpuTemp ?? 0
+        
+        // Get GPU temperature from SMC
+        let gpuTemp = smcData.gpuTemp ?? cpuTemp  // Fallback to CPU temp if GPU not available
+        
+        // Get fan speed from SMC
+        let fanSpeed = smcData.fanSpeed
+        
+        // Get thermal pressure from ProcessInfo (built-in macOS API)
+        let pressure = ProcessInfo.processInfo.thermalPressureString
+        
+        // Get CPU usage from host_statistics
+        let cpuUsage = getCPUUsage()
+        
+        return (
+            cpuTemp: cpuTemp,
+            gpuTemp: gpuTemp,
+            cpuUsage: cpuUsage,
+            fanSpeed: fanSpeed,
+            pressure: pressure
+        )
+    }
+    
+    /// Get CPU usage percentage using host_statistics
+    private func getCPUUsage() -> Double {
+        var cpuInfo: host_cpu_load_info_data_t = host_cpu_load_info_data_t()
+        var count = mach_msg_type_number_t(MemoryLayout<host_cpu_load_info_data_t>.size / MemoryLayout<integer_t>.size)
+        
+        let result = withUnsafeMutablePointer(to: &cpuInfo) {
+            $0.withMemoryRebound(to: integer_t.self, capacity: Int(count)) {
+                host_statistics(mach_host_self(), HOST_CPU_LOAD_INFO, $0, &count)
             }
         }
         
-        // Fallback: Use system profiler for basic temp (simulated for demo)
-        return (
-            cpuTemp: Double.random(in: 45...85),
-            gpuTemp: Double.random(in: 40...80),
-            cpuUsage: Double.random(in: 10...90),
-            fanSpeed: Int.random(in: 1200...6000),
-            pressure: ["Nominal", "Moderate", "Heavy"].randomElement() ?? "Nominal"
-        )
+        guard result == KERN_SUCCESS else {
+            return 0
+        }
+        
+        let userTicks = Double(cpuInfo.cpu_ticks.0)   // CPU_STATE_USER
+        let systemTicks = Double(cpuInfo.cpu_ticks.1) // CPU_STATE_SYSTEM
+        let idleTicks = Double(cpuInfo.cpu_ticks.2)   // CPU_STATE_IDLE
+        let niceTicks = Double(cpuInfo.cpu_ticks.3)   // CPU_STATE_NICE
+        
+        let totalTicks = userTicks + systemTicks + idleTicks + niceTicks
+        let usedTicks = userTicks + systemTicks + niceTicks
+        
+        guard totalTicks > 0 else { return 0 }
+        
+        return (usedTicks / totalTicks) * 100
     }
     
     // MARK: - Power Mode Control
