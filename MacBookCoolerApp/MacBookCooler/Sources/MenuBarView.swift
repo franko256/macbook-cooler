@@ -130,7 +130,13 @@ struct SettingsPanelView: View {
                                 title: "Show in Menu Bar",
                                 icon: "menubar.rectangle",
                                 isOn: Binding(
-                                    get: { UserDefaults.standard.bool(forKey: "showTemperatureInMenuBar") },
+                                    get: { 
+                                        // Default to true if not set
+                                        if UserDefaults.standard.object(forKey: "showTemperatureInMenuBar") == nil {
+                                            return true
+                                        }
+                                        return UserDefaults.standard.bool(forKey: "showTemperatureInMenuBar")
+                                    },
                                     set: { UserDefaults.standard.set($0, forKey: "showTemperatureInMenuBar") }
                                 )
                             )
@@ -274,7 +280,8 @@ struct SettingsPanelView: View {
                 Text(title)
                     .font(.system(size: 11, weight: .medium))
                 Spacer()
-                Text(String(format: "%.0f°C", value.wrappedValue))
+                // Display temperature in user's preferred unit
+                Text(String(format: "%.0f%@", appState.displayTemperature(value.wrappedValue), appState.temperatureUnit.symbol))
                     .font(.system(size: 11, weight: .semibold, design: .rounded))
                     .foregroundColor(color)
             }
@@ -810,13 +817,14 @@ struct GeneralSettingsView: View {
 }
 
 struct ThresholdsSettingsView: View {
+    @EnvironmentObject var appState: AppState
     @AppStorage("highThreshold") private var highThreshold = 80.0
     @AppStorage("lowThreshold") private var lowThreshold = 65.0
     
     var body: some View {
         Form {
             VStack(alignment: .leading) {
-                Text("High Temperature Threshold: \(Int(highThreshold))°C")
+                Text("High Temperature Threshold: \(Int(appState.displayTemperature(highThreshold)))\(appState.temperatureUnit.symbol)")
                 Slider(value: $highThreshold, in: 70...100, step: 1)
                 Text("Triggers Low Power Mode when exceeded")
                     .font(.caption)
@@ -824,7 +832,7 @@ struct ThresholdsSettingsView: View {
             }
             
             VStack(alignment: .leading) {
-                Text("Low Temperature Threshold: \(Int(lowThreshold))°C")
+                Text("Low Temperature Threshold: \(Int(appState.displayTemperature(lowThreshold)))\(appState.temperatureUnit.symbol)")
                 Slider(value: $lowThreshold, in: 50...80, step: 1)
                 Text("Returns to normal mode when reached")
                     .font(.caption)

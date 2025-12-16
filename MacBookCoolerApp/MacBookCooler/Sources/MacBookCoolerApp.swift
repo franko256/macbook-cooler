@@ -77,7 +77,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private func setupMenu() {
         menu = NSMenu()
         
-        let tempItem = NSMenuItem(title: "Temperature: --°C", action: nil, keyEquivalent: "")
+        let tempItem = NSMenuItem(title: "Temperature: --", action: nil, keyEquivalent: "")
         tempItem.isEnabled = false
         tempItem.tag = 100
         menu?.addItem(tempItem)

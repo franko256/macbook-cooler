@@ -82,6 +82,14 @@ class AppState: ObservableObject {
     private let thermalPowerPath = "/opt/homebrew/bin/thermal-power"
     
     init() {
+        // Register default values for UserDefaults
+        UserDefaults.standard.register(defaults: [
+            "showTemperatureInMenuBar": true,
+            "launchAtLogin": false,
+            "highThreshold": 80.0,
+            "lowThreshold": 65.0
+        ])
+        
         hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
         if let unitString = UserDefaults.standard.string(forKey: "temperatureUnit"),
            let unit = TemperatureUnit(rawValue: unitString) {
