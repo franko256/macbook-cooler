@@ -140,37 +140,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         guard let button = statusItem?.button else { return }
         
         let config = NSImage.SymbolConfiguration(pointSize: 14, weight: .medium)
-        var symbolName: String
-        var tintColor: NSColor
         
+        // Determine icon based on temperature (in Celsius)
+        let symbolName: String
         if temperature >= 90 {
             symbolName = "thermometer.sun.fill"
-            tintColor = .systemRed
         } else if temperature >= 75 {
             symbolName = "thermometer.high"
-            tintColor = .systemOrange
-        } else if temperature >= 60 {
+        } else if temperature >= 50 {
             symbolName = "thermometer.medium"
-            tintColor = .controlTextColor // Adapts to menu bar appearance
         } else {
             symbolName = "thermometer.low"
-            tintColor = .systemGreen
         }
         
-        // Create image and set as template for proper menu bar appearance
-        if let image = NSImage(systemSymbolName: symbolName, accessibilityDescription: nil)?.withSymbolConfiguration(config) {
-            // For normal temps, use template mode so it adapts to menu bar
-            if temperature >= 60 && temperature < 75 {
-                image.isTemplate = true
-                button.image = image
-                button.contentTintColor = nil // Let system handle color
-            } else {
-                image.isTemplate = false
-                button.image = image
-                button.contentTintColor = tintColor
-            }
+        // Create image - always use template mode for consistent menu bar appearance
+        if let image = NSImage(systemSymbolName: symbolName, accessibilityDescription: "Temperature")?.withSymbolConfiguration(config) {
+            image.isTemplate = true  // Always template for proper menu bar adaptation
+            button.image = image
+            button.contentTintColor = nil  // Let system handle the color
         }
         
+        // Update temperature text
         let displayTemp = AppState.shared.displayTemperature(temperature)
         let unitSymbol = AppState.shared.temperatureUnit.shortSymbol
         button.title = String(format: " %.0f°%@", displayTemp, unitSymbol)
