@@ -2,7 +2,7 @@ import SwiftUI
 
 // Constants for consistent sizing
 private let viewWidth: CGFloat = 320
-private let viewHeight: CGFloat = 560
+private let viewHeight: CGFloat = 520
 private let horizontalPadding: CGFloat = 16
 private let contentWidth: CGFloat = viewWidth - (horizontalPadding * 2)
 
@@ -527,8 +527,8 @@ struct MainDashboardView: View {
             // Header
             headerView
                 .frame(width: contentWidth)
-                .padding(.top, 28)
-                .padding(.bottom, 8)
+                .padding(.top, 16)
+                .padding(.bottom, 6)
             
             Divider()
                 .frame(width: contentWidth)
@@ -551,8 +551,8 @@ struct MainDashboardView: View {
             // Footer
             footerView
                 .frame(width: contentWidth)
-                .padding(.top, 10)
-                .padding(.bottom, 20)
+                .padding(.top, 8)
+                .padding(.bottom, 12)
         }
         .frame(width: viewWidth, height: viewHeight)
     }
